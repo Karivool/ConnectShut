@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ConnectShut.urls'
+ROOT_URLCONF = 'connectshut.urls'
 
 TEMPLATES = [
     {
@@ -77,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ConnectShut.wsgi.application'
+WSGI_APPLICATION = 'connectshut.wsgi.application'
 
 
 # Database
@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'ConnectShut.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(SITE_NAME, 'db.sqlite3'),
     }
 }
 
@@ -151,23 +151,45 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.uglifyjs.UglifyJSCompressor'
 if DEBUG:
     PIPELINE_BROWSERIFY_ARGUMENTS = '-t babelify'
 
-PIPELINE_CSS = {
-    'connectshut_css': {
-        'source_filenames': (
-            'css/style.css',
-        ),
-        'output_filename': 'css/connectshut_css.css',
+PIPELINE = {
+    'STYLESHEETS' : {
+        'connectshut_css': {
+            'source_filenames': (
+                'css/style.css',
+            ),
+            'output_filename': 'css/connectshut_css.css',
+        },
     },
-}
-
-PIPELINE_JS = {
-    'connectshut_js': {
-        'source_filenames': (
-            'js/bower_components/jquery/dist/jquery.min.js',
-            'js/bower_components/react/JSXTransformer.js',
-            'js/bower_components/react/react-with-addons.js',
-            'js/app.browserify.js',
-        ),
-        'output_filename': 'js/connectshut_js.js',
+    'JAVASCRIPT': {
+        'connectshut_js': {
+            'source_filenames': (
+                'bower_components/jquery/dist/jquery.min.js',
+                'bower_components/react/JSXTransformer.js',
+                'bower_components/react/react-with-addons.js',
+                'app.browserify.js',
+            ),
+            'output_filename': 'connectshut_js.js',
+        }
     }
 }
+
+# PIPELINE_CSS = {
+#     'connectshut_css': {
+#         'source_filenames': (
+#             'css/style.css',
+#         ),
+#         'output_filename': 'css/connectshut_css.css',
+#     },
+# }
+
+# PIPELINE_JS = {
+#     'connectshut_js': {
+#         'source_filenames': (
+#             'js/bower_components/jquery/dist/jquery.min.js',
+#             'js/bower_components/react/JSXTransformer.js',
+#             'js/bower_components/react/react-with-addons.js',
+#             'js/app.browserify.js',
+#         ),
+#         'output_filename': 'js/connectshut_js.js',
+#     }
+# }
