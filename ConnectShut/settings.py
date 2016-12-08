@@ -15,7 +15,7 @@ from os.path import abspath, basename, dirname, join, normpath
 
 # Replace BASE_DIR with this
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
-SITE_ROOT = dirname(DJANGO_ROOT)
+SITE_ROOT = DJANGO_ROOT
 SITE_NAME = basename(DJANGO_ROOT)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -152,44 +152,23 @@ if DEBUG:
     PIPELINE_BROWSERIFY_ARGUMENTS = '-t babelify'
 
 PIPELINE = {
-    'STYLESHEETS' : {
-        'connectshut_css': {
+    'PIPELINE_ENABLED': True,
+    'PIPELINE_JS': {
+        'jsfiles': {
+            'source_filenames': (
+                'js/bower_components/jquery/dist/jquery.min.js',
+                'js/bower_components/react/react-with-addons.js',
+                'js/app.browserify.js',
+            ),
+            'output_filename': 'connectshut_js.js',
+        },
+    },
+    'PIPELINE_CSS': {
+        'cssfiles': {
             'source_filenames': (
                 'css/style.css',
             ),
-            'output_filename': 'css/connectshut_css.css',
+            'output_filename': 'connectshut_css.css',
         },
     },
-    'JAVASCRIPT': {
-        'connectshut_js': {
-            'source_filenames': (
-                'bower_components/jquery/dist/jquery.min.js',
-                'bower_components/react/JSXTransformer.js',
-                'bower_components/react/react-with-addons.js',
-                'app.browserify.js',
-            ),
-            'output_filename': 'connectshut_js.js',
-        }
-    }
 }
-
-# PIPELINE_CSS = {
-#     'connectshut_css': {
-#         'source_filenames': (
-#             'css/style.css',
-#         ),
-#         'output_filename': 'css/connectshut_css.css',
-#     },
-# }
-
-# PIPELINE_JS = {
-#     'connectshut_js': {
-#         'source_filenames': (
-#             'js/bower_components/jquery/dist/jquery.min.js',
-#             'js/bower_components/react/JSXTransformer.js',
-#             'js/bower_components/react/react-with-addons.js',
-#             'js/app.browserify.js',
-#         ),
-#         'output_filename': 'js/connectshut_js.js',
-#     }
-# }
